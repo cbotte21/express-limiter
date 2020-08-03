@@ -5,19 +5,21 @@ NOTES: Removing "json_response" parameter from app.use() will just end request! 
 
 Usage: 
 
-    // WITH JSON-RESPONSE
+    // REQUIRE && CONFIGURE
     
-      let express-limiter = require('./location/express-limiter');
-      app.use(express-limiter({
+      let express_limiter = require('./location/express-limiter');
+      const limiter = express_limiter({
           INTERVAL: 10000,
           MAX_REQUESTS: 10,
-          json_response: { success: false, meta: "Too Many Requests!" }
-      }));
+          json_response: { success: false, meta: "Too Many Requests!" } // READ NOTES
+      });
+      
+    // GLOBAL
+        
+      app.use(limiter);
+      
+    // PRIVATE
     
-    // WITHOUT JSON-RESPONSE
-    
-      let express-limiter = require('./location/express-limiter');
-      app.use(express-limiter({
-          INTERVAL: 10000,
-          MAX_REQUESTS: 10
-      }));
+      app.get('/', limiter, (req, res) => {
+        res.send("Page Working!");
+      });
