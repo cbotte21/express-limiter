@@ -5,7 +5,7 @@ NOTES: Removing "json_response" parameter from app.use() will just end request! 
 
 Usage: 
 
-    WITH JSON-RESPONSE:
+    // WITH JSON-RESPONSE
     
       let express-limiter = require('./location/express-limiter');
       app.use(express-limiter({
@@ -14,10 +14,10 @@ Usage:
           json_response: { success: false, meta: "Too Many Requests!" }
       }));
     
-    WITHOUT JSON-RESPONSE:
+    // WITHOUT JSON-RESPONSE
     
-          let express-limiter = require('./location/express-limiter');
-          app.use(express-limiter({
-              INTERVAL: 10000,
-              MAX_REQUESTS: 10
-          }));
+      let express-limiter = require('./location/express-limiter');
+      app.use(express-limiter({
+          INTERVAL: 10000,
+          MAX_REQUESTS: 10
+      }));
